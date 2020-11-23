@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Book} from '../../model/book';
 
 @Component({
@@ -7,21 +7,6 @@ import {Book} from '../../model/book';
   styleUrls: ['./book-details.component.scss']
 })
 export class BookDetailsComponent {
-  readonly book: Book;
-
-  constructor() {
-    this.book = {
-      author: 'Marek Matczak',
-      title: 'Angular for nerds'
-    };
-  }
-
-  printValue(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    console.log(inputElement.value);
-  }
-
-  onBlur(): void {
-    console.log('Blur');
-  }
+  @Input()
+  book: Book;
 }
