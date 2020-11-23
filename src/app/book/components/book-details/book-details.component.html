@@ -1,0 +1,11 @@
+<form>
+  <label for="author">Author:</label>
+  <input id="author"
+         [value]="book.author"
+         (input)="printValue($event)"
+         (blur)="onBlur()">
+  <label for="title">Title:</label>
+  <input id="title"
+         [value]="book.title">
+  <button>Save</button>
+</form>
