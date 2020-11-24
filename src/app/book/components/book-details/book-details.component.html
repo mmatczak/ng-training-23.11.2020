@@ -1,4 +1,5 @@
-<form class="container">
+<form class="container"
+      (submit)="notifyOnBookChange($event)">
   <div class="form-group">
     <label for="author">Author:</label>
     <input id="author" class="form-control"
