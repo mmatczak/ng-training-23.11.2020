@@ -36,4 +36,17 @@ export class BookService {
       subscriber.complete();
     });
   }
+
+  getOne(bookId: number): Observable<Book> {
+    return new Observable<Book>(subscriber => {
+      const currentBooks = this.booksSubject.value;
+      const foundBook = currentBooks.find(book => book.id === bookId);
+      if (foundBook) {
+        subscriber.next(foundBook);
+        subscriber.complete();
+      } else {
+        subscriber.error(new Error(`Book with id ${bookId} could not be found`));
+      }
+    });
+  }
 }

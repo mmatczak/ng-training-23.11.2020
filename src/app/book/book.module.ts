@@ -9,7 +9,6 @@ import {BookService} from './services/book.service';
   imports: [
     CommonModule
   ],
-  // providers: [BookService],
   exports: [BookOverviewComponent]
 })
 export class BookModule {

@@ -1,5 +1,8 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Book} from '../../model/book';
+import {ActivatedRoute} from '@angular/router';
+import {BookService} from '../../services/book.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'ba-book-details',
@@ -8,11 +11,20 @@ import {Book} from '../../model/book';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookDetailsComponent {
-  @Input()
-  book: Book;
+  book$: Observable<Book>;
 
   @Output()
   bookChange = new EventEmitter<Book>();
+
+  constructor(route: ActivatedRoute, books: BookService) {
+    const bookIdAsString = route.snapshot.paramMap.get('bookId');
+    if (bookIdAsString) {
+      const bookId = +bookIdAsString;
+      if (!isNaN(bookId)) {
+        this.book$ = books.getOne(bookId);
+      }
+    }
+  }
 
   notifyOnBookChange(event: Event): void {
     event.preventDefault();
@@ -22,7 +34,8 @@ export class BookDetailsComponent {
     const titleInput = formElement.querySelector<HTMLInputElement>('#title');
 
     const changedBook: Book = {
-      id: this.book.id,
+      // id: this.book.id,
+      id: 0,
       author: authorInput.value,
       title: titleInput.value
     };

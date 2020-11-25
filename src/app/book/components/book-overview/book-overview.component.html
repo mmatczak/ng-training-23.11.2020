@@ -1,25 +1,17 @@
-<div class="row">
-  <table class="table col-8">
-    <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Author</th>
-      <th scope="col">Title</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let book of (books$ | async); index as i"
-        (click)="selectBook(book)"
-        [class.table-info]="isBookSelected(book)">
-      <th scope="row">{{i + 1}}</th>
-      <td>{{book.author}}</td>
-      <td>{{book.title}}</td>
-    </tr>
-    </tbody>
-  </table>
-  <ba-book-details class="col-4"
-                   *ngIf="selectedBook"
-                   [book]="selectedBook"
-                   (bookChange)="updateBook($event)">
-  </ba-book-details>
-</div>
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Author</th>
+    <th scope="col">Title</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let book of (books$ | async); index as i"
+      (click)="goToDetails(book)">
+    <th scope="row">{{i + 1}}</th>
+    <td>{{book.author}}</td>
+    <td>{{book.title}}</td>
+  </tr>
+  </tbody>
+</table>
