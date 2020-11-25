@@ -6,6 +6,8 @@ import {BookModule} from './book/book.module';
 import {RouterModule} from '@angular/router';
 import {BookOverviewComponent} from './book/components/book-overview/book-overview.component';
 import {BookDetailsComponent} from './book/components/book-details/book-details.component';
+import {BookResolver} from './book/components/book-details/book.resolver';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,7 @@ import {BookDetailsComponent} from './book/components/book-details/book-details.
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     BookModule.forRoot(),
     RouterModule.forRoot([
       {path: '', redirectTo: '/books', pathMatch: 'full'},
@@ -22,6 +25,13 @@ import {BookDetailsComponent} from './book/components/book-details/book-details.
       },
       {
         path: 'book/:bookId',
+        component: BookDetailsComponent,
+        resolve: {
+          book: BookResolver
+        }
+      },
+      {
+        path: 'book',
         component: BookDetailsComponent
       }
     ])

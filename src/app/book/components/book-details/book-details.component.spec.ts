@@ -35,7 +35,7 @@ describe('BookDetailsComponent', () => {
         done();
       });
       // when
-      component.notifyOnBookChange(eventMock);
+      component.saveBook(eventMock);
       console.log('End');
     });
   });
