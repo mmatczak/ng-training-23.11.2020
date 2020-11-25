@@ -1,8 +1,9 @@
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {Book} from '../model/book';
+import {OnDestroy} from '@angular/core';
 
 export class BookService {
-  private readonly books = [
+  private booksSubject = new BehaviorSubject<Book[]>([
     {
       id: 0,
       author: 'Marek Matczak',
@@ -18,9 +19,21 @@ export class BookService {
       author: 'John Example',
       title: 'Angular for dummies'
     }
-  ];
+  ]);
 
   getAll(): Observable<Book[]> {
-    return of(this.books);
+    return this.booksSubject.asObservable();
+  }
+
+  update(bookToUpdate: Book): Observable<Book> {
+    return new Observable<Book>(subscriber => {
+      const copy = {...bookToUpdate};
+      const currentBooks = this.booksSubject.value;
+      const newBooks = currentBooks.map(
+        book => book.id === copy.id ? copy : book);
+      this.booksSubject.next(newBooks);
+      subscriber.next(copy);
+      subscriber.complete();
+    });
   }
 }
