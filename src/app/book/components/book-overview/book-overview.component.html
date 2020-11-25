@@ -1,3 +1,12 @@
+
+
+
+<div class="row typeahead">
+  <div class="col-5">
+    <input value="jkfhksdh" class="form-control" #searchInput>
+    {{results$ | async | json}}
+  </div>
+</div>
 <div class="row">
   <table class="table col-8">
     <thead class="thead-dark">
@@ -8,7 +17,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let book of books; index as i"
+    <tr *ngFor="let book of (books$ | async); index as i"
         (click)="selectBook(book)"
         [class.table-info]="isBookSelected(book)">
       <th scope="row">{{i + 1}}</th>
