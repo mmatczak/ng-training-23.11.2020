@@ -5,17 +5,19 @@
       #bookFormDirective="ngForm">
   <div class="form-group">
     <label for="author">Author:</label>
-    <input id="author"
-           class="form-control"
-           formControlName="author">
-    <span class="invalid-feedback">{{getErrorMessagesOf(bookForm.get('author'))}}</span>
+    <ba-with-errors>
+      <input id="author"
+             class="form-control"
+             formControlName="author">
+    </ba-with-errors>
   </div>
 
   <div class="form-group">
     <label for="title">Title:</label>
-    <input id="title" class="form-control"
-           formControlName="title">
-    <span class="invalid-feedback">{{getErrorMessagesOf(bookForm.get('title'))}}</span>
+    <ba-with-errors>
+      <input id="title" class="form-control"
+             formControlName="title">
+    </ba-with-errors>
   </div>
   <button class="btn btn-primary">Save</button>
 </form>

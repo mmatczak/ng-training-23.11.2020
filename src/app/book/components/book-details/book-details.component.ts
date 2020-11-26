@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BookService} from '../../services/book.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'ba-book-details',
@@ -24,8 +24,7 @@ export class BookDetailsComponent implements OnDestroy {
     this.bookForm = new FormGroup({
       author: new FormControl('',
         [Validators.required,
-          Validators.maxLength(15),
-          startsWith('John')]),
+          Validators.maxLength(15)]),
       title: new FormControl('', Validators.required)
     });
     this.book = route.snapshot.data.book as Book;
@@ -51,38 +50,8 @@ export class BookDetailsComponent implements OnDestroy {
     }
   }
 
-  getErrorMessagesOf(formControl: AbstractControl): string[] {
-    const errors = formControl?.errors;
-    return errors ? Object.keys(errors).map(errorCode => {
-      switch (errorCode) {
-        case 'required':
-          return 'Please provide a value';
-        case 'maxlength':
-          const errorMeta = errors[errorCode];
-          return `The length exceeded ${errorMeta.requiredLength} characters (by ${errorMeta.actualLength - errorMeta.requiredLength} characters)`;
-        default:
-          return 'Unknown error occurred';
-      }
-    }) : [];
-  }
-
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
 }
-
-function startsWith(testValue: string): ValidatorFn {
-  // tslint:disable-next-line:only-arrow-functions
-  return function(control: AbstractControl): ValidationErrors | null {
-    const value = control?.value;
-    if (value && !value.startsWith(testValue)) {
-      return {
-        startsWithMarek: false
-      };
-    }
-
-    return null;
-  };
-}
-
