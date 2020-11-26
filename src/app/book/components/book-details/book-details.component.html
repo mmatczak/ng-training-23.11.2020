@@ -1,15 +1,21 @@
 <form class="container"
-      (submit)="saveBook($event)">
+      [formGroup]="bookForm"
+      (ngSubmit)="saveBook()"
+      [class.ng-submitted]="bookFormDirective.submitted"
+      #bookFormDirective="ngForm">
   <div class="form-group">
     <label for="author">Author:</label>
-    <input id="author" class="form-control"
-           [value]="book?.author">
+    <input id="author"
+           class="form-control"
+           formControlName="author" #searchInput>
+    <span class="invalid-feedback">{{bookForm.get('author').errors | json}}</span>
   </div>
 
   <div class="form-group">
     <label for="title">Title:</label>
     <input id="title" class="form-control"
-           [value]="book?.title">
+           formControlName="title">
+    <span>{{bookForm.get('title').errors | json}}</span>
   </div>
   <button class="btn btn-primary">Save</button>
 </form>
