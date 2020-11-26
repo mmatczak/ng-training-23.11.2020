@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BookService} from '../../services/book.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'ba-book-details',
