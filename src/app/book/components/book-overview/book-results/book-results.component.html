@@ -1,0 +1,17 @@
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Author</th>
+    <th scope="col">Title</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let book of books; index as i"
+      (click)="notifyOnBookClick(book)">
+    <th scope="row">{{i + 1}}</th>
+    <td>{{book.author}}</td>
+    <td>{{book.title}}</td>
+  </tr>
+  </tbody>
+</table>

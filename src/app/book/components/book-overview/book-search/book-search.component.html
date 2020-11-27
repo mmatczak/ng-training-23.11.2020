@@ -1,0 +1,9 @@
+<form class="form-inline"
+      [formGroup]="searchForm"
+      (ngSubmit)="notifyOnQueryChange()">
+  <label class="sr-only" for="inlineFormInputName2">Name</label>
+  <input formControlName="query"
+         type="text" class="form-control mb-2 mr-sm-2"
+         id="inlineFormInputName2" placeholder="Type your query here...">
+  <button type="submit" class="btn btn-primary mb-2">Submit</button>
+</form>

@@ -1,7 +1,6 @@
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Book} from '../model/book';
-import {delay} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -11,6 +10,11 @@ export class BookService {
 
   getAll(): Observable<Book[]> {
     return this.http.get<Book[]>('api/books');
+  }
+
+  search(query: string): Observable<Book[]> {
+    const params = new HttpParams().append('q', query || '');
+    return this.http.get<Book[]>('api/books', {params});
   }
 
   saveOrUpdate(bookToUpdate: Book): Observable<Book> {
